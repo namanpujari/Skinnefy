@@ -1,2 +1,4 @@
 # ignore all dataset folders, raw and processed
 raw_data/
+final_dataset/
+dataset/
