@@ -9,7 +9,7 @@ npm-debug.*
 *.orig.*
 web-build/
 web-report/
-./utils/sagemakerCalls.js
+./utils/
 
 # macOS
 .DS_Store
