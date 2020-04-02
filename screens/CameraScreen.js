@@ -42,7 +42,6 @@ export default function CameraScreen({ navigation, route }) {
             ref={(ref) => { camera = ref; }}>
     
               <View style={{flex: 1, flexDirection: "column", justifyContent: "flex-end"}}>
-
                 <Text style={{fontWeight: "bold", padding: 25, fontSize: 15, color: "#fff", alignSelf: "center",}}>Take a picture of your skin condition</Text> 
 
                 <View style={{paddingBottom: 20, flexDirection: "row", justifyContent: "space-evenly", 
@@ -50,7 +49,7 @@ export default function CameraScreen({ navigation, route }) {
                   
                     <TouchableOpacity
                         onPress={() => {
-                        camera.takePictureAsync({ onPictureSaved: onPictureSaved});
+                        camera.takePictureAsync({ base64: true, compression: 1.0, onPictureSaved: onPictureSaved});
                     }}>
                         <Ionicons
                         name='ios-radio-button-off'

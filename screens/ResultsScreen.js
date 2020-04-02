@@ -5,7 +5,7 @@ import Ionicons from '@expo/vector-icons';
 import { useEndpoint } from '../utils/sagemakerCalls'; 
 
 export default function ResultsScreen({ navigation, route }) {
-    const { isLoading, data, err } = useEndpoint(route.params.data.uri);
+    const { isLoading, data, err } = useEndpoint(route.params.data);
 
     return (
         <View style={styles.container}>
@@ -32,7 +32,7 @@ export default function ResultsScreen({ navigation, route }) {
                     !isLoading &&
                     (err ? 
                         <View style={{flex: 1, justifyContent: "center", alignItems: "center"}}>
-                            <Text style={{color: "red"}}>ERROR: {err} </Text>
+                            <Text style={{color: "red"}}>ERROR: {err}</Text>
                         </View>
                     :
                         <Text> Data: </Text>
