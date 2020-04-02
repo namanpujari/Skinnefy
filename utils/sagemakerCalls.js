@@ -13,12 +13,13 @@ var AWS = require('aws-sdk/dist/aws-sdk-react-native');
 //     }
 // })
 
-var sagemakerruntime = new AWS.SageMakerRuntime({accessKeyId: "AKIAIRFDWRRZECSBYY4A", 
-    secretAccessKey: "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", region: "us-east-2",});
+var sagemakerruntime = new AWS.SageMakerRuntime({accessKeyId: "*", 
+    secretAccessKey: "*", region: "us-east-2",});
 
 const endpoint_name = "skin-classification-endpoint--4-1-2020";
 
 export function useEndpoint(image) {
+    
     const [queryState, setQueryState] = React.useState({ isLoading: true, data: null, err: null });
     const params = {
         Body: image, // THIS IMAGE IS CURRENTLY JUST A STRING URI OF WHERE THE IMAGE IS LOCALLY STORED
@@ -29,6 +30,7 @@ export function useEndpoint(image) {
     React.useEffect(() => {
         sagemakerruntime.invokeEndpoint(params, function(err, data) {
             if(err) {
+                console.log(image)
                 setQueryState({ isLoading: false, data: null, err: err.message})
             }
             else {
