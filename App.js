@@ -1,24 +1,40 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, } from 'react-native';
+import { StyleSheet, View, } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+// import the screens that are being used
+import CameraScreen from './screens/CameraScreen';
+import ResultsScreen from './screens/ResultsScreen';
+
+
+const Stack = createStackNavigator();
+// creates stack navigator for basic navigation across camera and 
+// results screen
+const INITIAL_ROUTE_NAME = 'Camera';
 
 export default function App() {
-  const [buttonPresses, setButtonPress] = React.useState(100);
-  //       state value    function that sets
   return (
     <View style={styles.container}>
-      <Text style = {{ textAlign: "center", fontSize: 20 }}> Click on this button to increase the number of taps!</Text>
-      <TouchableOpacity style = {styles.button}
-        onPress={() => {
-          setButtonPress(buttonPresses + 1);
-        }}  
-      >
-        <Text style={{fontSize: 30}}> Click me! </Text>
-      </TouchableOpacity>
-      <View style={{marginTop: 10}}> 
-        <Text style={{textAlign: "center", fontSize: 25}}>
-          You clicked {buttonPresses} times!  
-        </Text> 
-      </View>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName={INITIAL_ROUTE_NAME} >
+          <Stack.Screen
+            name='Camera'
+            component={CameraScreen}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name='Results'
+            component={ResultsScreen}
+            options={{
+              headerShown: true,
+              title: "Here's what we think"
+            }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
     </View>
   );
 }
@@ -26,8 +42,6 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#ffffff",
   },
-  button: { padding: 10, marginVertical: 10, backgroundColor: "#dddddd", borderColor: "#bbbbbb", borderWidth: 0.5, elevation: 1 }
 });
