@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { Image, Text, StyleSheet, View, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { Image, Text, StyleSheet, View, TouchableOpacity, ActivityIndicator, Dimensions } from 'react-native';
 import Ionicons from '@expo/vector-icons';
+import { BarChart, } from 'react-native-chart-kit';
 
 import { useEndpoint } from '../utils/sagemakerCalls'; 
 
@@ -30,13 +31,32 @@ export default function ResultsScreen({ navigation, route }) {
 
                 {
                     !isLoading &&
-                    (err ? 
-                        <View style={{flex: 1, justifyContent: "center", alignItems: "center"}}>
+                    <View style={{flex: 1, justifyContent: "center", alignItems: "center"}}>
+                        {err ? 
                             <Text style={{color: "red"}}>ERROR: {err}</Text>
-                        </View>
-                    :
-                        <Text> Data: </Text>
-                    )
+                        :
+                            <BarChart
+                                // style={graphStyle}
+                                data={data}
+                                width={Dimensions.get('window').width - 20}
+                                height={200}
+                                chartConfig={{
+                                    backgroundColor: '#1cc910',
+                                    backgroundGradientFrom: '#fff',
+                                    backgroundGradientTo: '#999',
+                                    decimalPlaces: 2, // optional, defaults to 2dp
+                                    color: (opacity = 255) => `rgba(0, 0, 0, ${opacity})`,
+                                    style: {
+                                      borderRadius: 16
+                                    }
+                                }}                              
+                                bezier
+                                style={{
+                                    borderRadius: 5,
+                                }}                              
+                            />
+                        }
+                    </View>
 
                 }
 

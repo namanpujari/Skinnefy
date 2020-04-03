@@ -6,6 +6,9 @@ import { createStackNavigator } from '@react-navigation/stack';
 // import the screens that are being used
 import CameraScreen from './screens/CameraScreen';
 import ResultsScreen from './screens/ResultsScreen';
+import {decode, encode} from 'base-64'
+if (!global.btoa) {  global.btoa = encode }
+if (!global.atob) { global.atob = decode }
 
 
 const Stack = createStackNavigator();
