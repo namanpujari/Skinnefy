@@ -7,18 +7,20 @@ import { Camera } from 'expo-camera';
 // for using camera again if tab is in focus again
 import { useIsFocused } from '@react-navigation/native';
 
+const CAMERA_RATIO = "4:3";
+var camera;
+
 export default function CameraScreen({ navigation, route }) {
     // navigation gives access to the React Navigation method 'navigate', 
     // which will allow us to jump to the results screen when the picture is taken.
     const [hasPermission, setHasPermission] = React.useState(null);
+    const [size, setSize] = React.useState(null);
     const [type, setType] = React.useState(Camera.Constants.Type.back);
-    const isFocused = useIsFocused();
-    var camera;
   
     React.useEffect(() => {
       (async () => {
         const { status } = await Camera.requestPermissionsAsync();
-        setHasPermission(status === 'granted');
+        setHasPermission(status === 'granted');     
       })();
     }, [])
   
@@ -34,53 +36,59 @@ export default function CameraScreen({ navigation, route }) {
       navigation.navigate('Results', { data: photo })
     }
 
-    return (
-        <View style={{ flex: 1, }}>
-        { 
-            isFocused &&
-            <Camera style={{ flex: 1, }} type={type} ratio="4:3"
-            ref={(ref) => { camera = ref; }}>
-    
-              <View style={{flex: 1, flexDirection: "column", justifyContent: "flex-end"}}>
-                <Text style={{fontWeight: "bold", padding: 25, fontSize: 15, color: "#fff", alignSelf: "center",}}>Take a picture of your skin condition</Text> 
+    const getPictureSizes = async () => {
+      if(camera) {
+        const availableSizes = await camera.getAvailablePictureSizesAsync(CAMERA_RATIO);
+        console.log(availableSizes); setSize(availableSizes);
+      }
+    }
 
-                <View style={{paddingBottom: 20, flexDirection: "row", justifyContent: "space-evenly", 
-                    alignItems: "center",}}>
-                  
-                    <TouchableOpacity
-                        onPress={() => {
-                        camera.takePictureAsync({ base64: true, compression: 1.0, onPictureSaved: onPictureSaved});
-                    }}>
-                        <Ionicons
+    return (
+      <View style={{ flex: 1, }}>
+          <Camera style={{ flex: 1, }} type={type} ratio={CAMERA_RATIO} 
+            autoFocus={false} pictureSize={(size ? size[0] : null)}
+            ref={ref => { camera = ref; }} autoFocus
+            onCameraReady={getPictureSizes}
+          >
+            <View style={{flex: 1, flexDirection: "column", justifyContent: "flex-end"}}>
+              <Text style={{fontWeight: "bold", padding: 25, fontSize: 15, color: "#fff", alignSelf: "center",}}>
+                Take a picture of your skin condition
+              </Text> 
+              <View style={{paddingBottom: 20, flexDirection: "row", justifyContent: "space-evenly", 
+                  alignItems: "center",}}>
+                  <TouchableOpacity
+                      onPress={() => {
+                      camera.takePictureAsync({ 
+                        base64: true, 
+                        compression: 0.0, 
+                        onPictureSaved: onPictureSaved});
+                      }}
+                  >
+                      <Ionicons
                         name='ios-radio-button-off'
                         color="#fefefe"
                         size={70}
-                        />
-                    </TouchableOpacity>
-        
-                    <TouchableOpacity
-                        onPress={() => {
-                        setType(
-                        type === Camera.Constants.Type.back
-                            ? Camera.Constants.Type.front
-                            : Camera.Constants.Type.back
-                        );
-                    }}>
-                        <Ionicons
-                        name='ios-refresh'
-                        color="#fefefe"
-                        size={35}
-                        />
-                    </TouchableOpacity>
-
-
-    
-                </View>
+                      />
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                      onPress={() => {
+                      setType(
+                      type === Camera.Constants.Type.back
+                          ? Camera.Constants.Type.front
+                          : Camera.Constants.Type.back
+                      );
+                  }}>
+                      <Ionicons
+                      name='ios-refresh'
+                      color="#fefefe"
+                      size={35}
+                      />
+                  </TouchableOpacity>
               </View>
-    
-            </Camera>
-          }
-        </View>
+            </View>
+  
+          </Camera>
+      </View>
     );
 }
 

@@ -1,21 +1,18 @@
 import * as React from 'react';
 var AWS = require('aws-sdk/dist/aws-sdk-react-native');
 var credentials = require("./config.json");
-import { Buffer } from 'buffer';
-
  
 var sagemakerruntime = new AWS.SageMakerRuntime({accessKeyId: credentials.accessKeyId, 
     secretAccessKey: credentials.secretAccessKey, region: "us-east-2",});
  
-const endpoint_name = "skin-classification-endpoint--4-2-2020"; 
-const BASE64_MARKER = ';base64,';
+const endpoint_name = "skin-classification-endpoint--4-3-2020"; 
 const conditions = ["Acne", "Melanoma", "Warts"];
 
 export function useEndpoint(image) {
-    // image is { uri: ''', base64: ''', }
-    var result = convertDataURIToBinary("data:image/jpeg;base64,"+image.base64);   
-
     const [queryState, setQueryState] = React.useState({ isLoading: true, data: null, err: null });
+
+    // convert the base64 encoding string to uint8 typearray
+    var result = convertToArray(image.base64);   
     React.useEffect(() => {
         sagemakerruntime.invokeEndpoint({
             Body: result,
@@ -23,33 +20,39 @@ export function useEndpoint(image) {
             ContentType: "application/x-image", 
         }, function(err, data) {
             if(err) {
-                setQueryState({ isLoading: false, data: null, err: err.message})
+                setQueryState({ 
+                    isLoading: false, 
+                    data: null, 
+                    err: err.message
+                })
             }
             else {
-                let prediction = convertResponseToJSON(data.Body);
-                setQueryState({ isLoading: false, data: prediction, err: null})
+                let prediction = prepareResponse(data.Body);
+                setQueryState({ 
+                    isLoading: false, 
+                    data: prediction, 
+                    err: null
+                })
             }
         });
     }, []);
     return queryState;
 }
 
-
-function convertDataURIToBinary(dataURI) {
-    var base64Index = dataURI.indexOf(BASE64_MARKER) + BASE64_MARKER.length; var i;
-    var base64 = dataURI.substring(base64Index);
-    var raw = atob(base64);
+function convertToArray(data) {
+    var raw = atob(data);
     var rawLength = raw.length;
     var array = new Uint8Array(new ArrayBuffer(rawLength));
 
-    for(i = 0; i < rawLength; i++) {
+    for(var i = 0; i < rawLength; i++) {
+        if(i < 10) console.log(raw.charCodeAt(i));
         array[i] = raw.charCodeAt(i);
     }
-
+    
     return array;
 }
 
-function convertResponseToJSON(responseBuffer) {
+function prepareResponse(responseBuffer) {
     const predictionValues = JSON.parse(responseBuffer.toString());
     console.log(predictionValues);
     
