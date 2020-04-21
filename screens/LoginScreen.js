@@ -47,7 +47,7 @@ export default function LoginScreen({ navigation, route }) {
                 <Button
                     color="#aaaaaa"
                     title="Create an account"
-                    onPress={() => navigation.navigate('Signup')}
+                    onPress={() => console.log("navigation.navigate('Signup')")}
                 />
             </View>
             {
