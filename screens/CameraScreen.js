@@ -16,6 +16,10 @@ export default function CameraScreen({ navigation, route }) {
     const [hasPermission, setHasPermission] = React.useState(null);
     const [size, setSize] = React.useState(null);
     const [type, setType] = React.useState(Camera.Constants.Type.back);
+
+    // to re-render camera component once add post tab is clicked again after
+    // being clicked away
+    const isFocused = useIsFocused();
   
     React.useEffect(() => {
       (async () => {
@@ -39,12 +43,12 @@ export default function CameraScreen({ navigation, route }) {
     const getPictureSizes = async () => {
       if(camera) {
         const availableSizes = await camera.getAvailablePictureSizesAsync(CAMERA_RATIO);
-        console.log(availableSizes); setSize(availableSizes);
       }
     }
 
     return (
       <View style={{ flex: 1, }}>
+          { isFocused &&
           <Camera style={{ flex: 1, }} type={type} ratio={CAMERA_RATIO} 
             autoFocus={false} pictureSize={(size ? size[0] : null)}
             ref={ref => { camera = ref; }} autoFocus
@@ -86,8 +90,8 @@ export default function CameraScreen({ navigation, route }) {
                   </TouchableOpacity>
               </View>
             </View>
-  
           </Camera>
+          }
       </View>
     );
 }

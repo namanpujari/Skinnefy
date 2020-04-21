@@ -1,6 +1,6 @@
 import * as React from 'react';
 var AWS = require('aws-sdk/dist/aws-sdk-react-native');
-var credentials = require("./config.json");
+var credentials = require("./awsConfig.json");
  
 var sagemakerruntime = new AWS.SageMakerRuntime({accessKeyId: credentials.accessKeyId, 
     secretAccessKey: credentials.secretAccessKey, region: "us-east-2",});
@@ -45,7 +45,6 @@ function convertToArray(data) {
     var array = new Uint8Array(new ArrayBuffer(rawLength));
 
     for(var i = 0; i < rawLength; i++) {
-        if(i < 10) console.log(raw.charCodeAt(i));
         array[i] = raw.charCodeAt(i);
     }
     
@@ -53,9 +52,7 @@ function convertToArray(data) {
 }
 
 function prepareResponse(responseBuffer) {
-    const predictionValues = JSON.parse(responseBuffer.toString());
-    console.log(predictionValues);
-    
+    const predictionValues = JSON.parse(responseBuffer.toString());    
     const prediction = {
         labels: conditions,
         datasets: [
