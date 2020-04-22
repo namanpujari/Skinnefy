@@ -20,7 +20,7 @@ export default function RemediesScreen({ navigation, route }) {
                     elevation: 2,
                 }}>
                 
-                <Text style={{fontWeight: "bold"}}> Symptoms: </Text>
+                <Text style={styles.textHeader}> Symptoms </Text>
                 {data.symptoms.map((x, i) => {
                     return (
                     <Text>{i + 1}: {x}</Text>
@@ -29,7 +29,7 @@ export default function RemediesScreen({ navigation, route }) {
                 
                 <Text>{'\n'}</Text>
                 
-                <Text style={{fontWeight: "bold"}}> Home Remedies: </Text>
+                <Text style={styles.textHeader}> Home Remedies </Text>
                 {data.Home_Remedies.map((x, i) => {
                     return (
                     <Text>{i + 1}: {x}</Text>
@@ -38,24 +38,22 @@ export default function RemediesScreen({ navigation, route }) {
                 
                 <Text>{'\n'}</Text>
                 
-                <Text style={{fontWeight: "bold"}}> Tips: </Text>
+                <Text style={styles.textHeader}> Tips </Text>
                 <Text> {data.tips} </Text>
 
                 <Text>{'\n'}</Text>
                 
-                <Text style={{fontWeight: "bold"}}> Prevalence: </Text>
+                <Text style={styles.textHeader}> Prevalence </Text>
                 <Text> {data.prevalence} </Text>
 
                 <Text>{'\n'}</Text>
                 
-                <Text style={{fontWeight: "bold"}}> Nearest Doctor: </Text>
+                <Text style={styles.textHeader}> Nearest Doctor </Text>
                 <Text> {data.doctor} </Text>
                 
                 </View>
             </ScrollView>
             }
-
-
 
         </React.Fragment>
     )
@@ -66,6 +64,11 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center"
     },
+    textHeader: {
+        fontWeight: "bold", 
+        textDecorationLine: 'underline', 
+        fontSize: 30,
+    }
 })
 
 function Loading() {
