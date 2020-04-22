@@ -5,7 +5,8 @@ import { useFirestoreDoc } from '../utils/db';
 export default function RemediesScreen({ navigation, route }) {
     
     // query for the condition that was identified with the endpoint
-    const { isLoading, data } = useFirestoreDoc('conditions', 'melanoma');
+    // this needs to be updated so that 
+    const { isLoading, data } = useFirestoreDoc('conditions', 'acne');
 
     return (
         <React.Fragment>
@@ -14,22 +15,43 @@ export default function RemediesScreen({ navigation, route }) {
             <ScrollView style={{
                 flex: 1
             }} contentContainerStyle={styles.container}>
-                <Text style={{fontWeight: "bold"}}> Nearest Doctor: </Text>
-                <Text> {data.doctor} </Text>
-                <Text>{'\n'}</Text>
-                <Text style={{fontWeight: "bold"}}> Prevalence: </Text>
-                <Text> {data.prevalence} </Text>
-                <Text>{'\n'}</Text>
-                <Text style={{fontWeight: "bold"}}> Tips: </Text>
-                <Text> {data.tips} </Text>
-                <Text>{'\n'}</Text>
+                <View style={{
+                    padding: 20, backgroundColor: "#fefefe",
+                    elevation: 2,
+                }}>
+                
                 <Text style={{fontWeight: "bold"}}> Symptoms: </Text>
                 {data.symptoms.map((x, i) => {
                     return (
                     <Text>{i + 1}: {x}</Text>
                     )
-                })
-                }
+                })}
+                
+                <Text>{'\n'}</Text>
+                
+                <Text style={{fontWeight: "bold"}}> Home Remedies: </Text>
+                {data.Home_Remedies.map((x, i) => {
+                    return (
+                    <Text>{i + 1}: {x}</Text>
+                    )
+                })}
+                
+                <Text>{'\n'}</Text>
+                
+                <Text style={{fontWeight: "bold"}}> Tips: </Text>
+                <Text> {data.tips} </Text>
+
+                <Text>{'\n'}</Text>
+                
+                <Text style={{fontWeight: "bold"}}> Prevalence: </Text>
+                <Text> {data.prevalence} </Text>
+
+                <Text>{'\n'}</Text>
+                
+                <Text style={{fontWeight: "bold"}}> Nearest Doctor: </Text>
+                <Text> {data.doctor} </Text>
+                
+                </View>
             </ScrollView>
             }
 
@@ -42,8 +64,7 @@ export default function RemediesScreen({ navigation, route }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
+        justifyContent: "center"
     },
 })
 
