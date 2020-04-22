@@ -3,7 +3,7 @@ import { View, StyleSheet, Text, } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import DiagnosisStackNavigator from './DiagnosisStackNavigator';
-import ProfileScreen from '../screens/ProfileScreen';
+import ProfileStackNavigator from './ProfileStackNavigator';
 
 import TabBarIcon from '../components/TabBarIcon';
 
@@ -14,7 +14,7 @@ export default function BottomTabNavigator() {
         <BottomTab.Navigator>
             <BottomTab.Screen
                 name="Remedies"
-                component={ProfileScreen}
+                component={ProfileStackNavigator}
                 options={{
                     tabBarIcon: ({ focused }) => 
                         <TabBarIcon focused={focused} name="ios-search" />,
@@ -30,7 +30,7 @@ export default function BottomTabNavigator() {
             />
             <BottomTab.Screen
                 name="Profile"
-                component={ProfileScreen}
+                component={ProfileStackNavigator}
                 options={{
                     tabBarIcon: ({ focused }) => 
                         <TabBarIcon focused={focused} name="ios-person" />,

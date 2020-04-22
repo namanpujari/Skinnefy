@@ -66,7 +66,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    flexDirection: "column", 
   },
   input: {
     elevation: 1, backgroundColor: "#e0e0e0", 

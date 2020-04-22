@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, } from 'react-native';
+import { StyleSheet, View, YellowBox } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { SplashScreen } from 'expo';
@@ -22,6 +22,8 @@ if (!global.btoa) {
 if (!global.atob) {
   global.atob = decode 
 }
+
+YellowBox.ignoreWarnings(['Setting a timer']);
 
 const Stack = createStackNavigator();
 // root stack navigator for the application

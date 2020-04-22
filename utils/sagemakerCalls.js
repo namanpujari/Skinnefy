@@ -5,8 +5,9 @@ var credentials = require("./awsConfig.json");
 var sagemakerruntime = new AWS.SageMakerRuntime({accessKeyId: credentials.accessKeyId, 
     secretAccessKey: credentials.secretAccessKey, region: "us-east-2",});
  
-const endpoint_name = "skin-classification-endpoint--4-3-2020"; 
-const conditions = ["Acne", "Melanoma", "Warts"];
+const endpoint_name = "skinnefy-training-version2-endpoint"; 
+const conditions = ["Acne", "Eczema", "Light Disease", "Melanoma", "Nail Fungus",
+                    "Psoriasis", "Scabies", "Seborrheic Keratoses", "Ringworm", "Warts"];
 
 export function useEndpoint(image) {
     const [queryState, setQueryState] = React.useState({ isLoading: true, data: null, err: null });
@@ -61,6 +62,5 @@ function prepareResponse(responseBuffer) {
             },
         ],
     }
-
     return prediction;
 }

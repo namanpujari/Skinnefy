@@ -33,7 +33,10 @@ export default function CameraScreen({ navigation, route }) {
     }
 
     if (hasPermission === false) {
-      return <Text>No access to camera</Text>;
+      return 
+      <Text>
+        No access to camera
+      </Text>;
     }
   
     const onPictureSaved = photo => {
@@ -43,6 +46,7 @@ export default function CameraScreen({ navigation, route }) {
     const getPictureSizes = async () => {
       if(camera) {
         const availableSizes = await camera.getAvailablePictureSizesAsync(CAMERA_RATIO);
+        setSize(availableSizes[0]);
       }
     }
 
@@ -50,7 +54,7 @@ export default function CameraScreen({ navigation, route }) {
       <View style={{ flex: 1, }}>
           { isFocused &&
           <Camera style={{ flex: 1, }} type={type} ratio={CAMERA_RATIO} 
-            autoFocus={false} pictureSize={(size ? size[0] : null)}
+            autoFocus={false} pictureSize={size}
             ref={ref => { camera = ref; }} autoFocus
             onCameraReady={getPictureSizes}
           >
