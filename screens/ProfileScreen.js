@@ -8,8 +8,6 @@ import { Avatar, Badge } from 'react-native-elements'
 import { logout, useSession } from '../utils/auth';
 import { useFirestoreDoc } from '../utils/db';
 
-const avatar_src = "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Karen_Pence_official_portrait_2_%28cropped%29.jpg/1200px-Karen_Pence_official_portrait_2_%28cropped%29.jpg";
-
 export default function ProfileScreen({ navigation, route }) {
     navigation.setOptions({
         headerRight: () => {
@@ -154,7 +152,7 @@ export default function ProfileScreen({ navigation, route }) {
                                         color: "#999",
                                         fontSize: 11,
                                     }}>
-                                        Click on the Diagnosis tab to make one!
+                                        Press on the Diagnosis tab to make one!
                                     </Text>
                                 </View>
                             }
