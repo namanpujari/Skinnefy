@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, YellowBox } from 'react-native';
+import { StyleSheet, View, YellowBox, StatusBar } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { SplashScreen } from 'expo';
@@ -39,17 +39,11 @@ export default function App() {
         <View style={styles.container}>
           {Platform.OS === 'ios' && <StatusBar barStyle="default"/>}
           <NavigationContainer>
-            <Stack.Navigator>
               {(user) ? (
-                <Stack.Screen
-                  name="Root"
-                  component={BottomTabNavigator}
-                  options={{
-                    headerShown: false,
-                  }}
-                />
+                <BottomTabNavigator />
               ) : (
-                <React.Fragment>
+                <Stack.Navigator>
+
                   <Stack.Screen
                     name="Login"
                     component={LoginScreen}
@@ -57,9 +51,8 @@ export default function App() {
                       headerShown: false,
                     }}
                   />
-                </React.Fragment>
+                </Stack.Navigator>
               )}
-            </Stack.Navigator>
           </NavigationContainer>
         </View>
       </userContext.Provider>
