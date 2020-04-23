@@ -71,7 +71,9 @@ function Loading() {
           marginTop: 15,
           fontSize: 13, 
           color: "grey" 
-        }}> Please wait while we get your data </Text>
+        }}>
+            Please wait while we gather some information
+        </Text>
       </View>
     )
   }

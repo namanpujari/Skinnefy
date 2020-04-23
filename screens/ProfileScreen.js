@@ -110,17 +110,14 @@ export default function ProfileScreen({ navigation, route }) {
                                             borderColor: "#cccccc",
                                             borderWidth: 0.5,
                                             elevation: 1,
-                                            padding: 16, 
+                                            padding: 14, 
                                             margin: 3, 
                                             }} 
                                             key={i} 
-                                            value={
-                                                <Text style={{
-                                                    color: "#555555",
-                                                }}> 
-                                                    {x} 
-                                                </Text>
-                                            } 
+                                            value={x}
+                                            textStyle={{
+                                                color: "#555"
+                                            }}
                                         />
                                     ) 
                                 })
