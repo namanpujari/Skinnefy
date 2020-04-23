@@ -14,16 +14,13 @@ export default function RemediesScreen({ navigation, route }) {
             { !isLoading && 
             <ScrollView style={{
                 flex: 1
-            }} contentContainerStyle={styles.container}>
-                <View style={{
-                    padding: 20, backgroundColor: "#fefefe",
-                    elevation: 2,
-                }}>
-                
+            }} 
+            contentContainerStyle={styles.container}
+            >
                 <Text style={{fontWeight: "bold"}}> Symptoms: </Text>
                 {data.symptoms.map((x, i) => {
                     return (
-                    <Text>{i + 1}: {x}</Text>
+                    <Text key={i}>{i + 1}: {x}</Text>
                     )
                 })}
                 
@@ -32,39 +29,33 @@ export default function RemediesScreen({ navigation, route }) {
                 <Text style={{fontWeight: "bold"}}> Home Remedies: </Text>
                 {data.Home_Remedies.map((x, i) => {
                     return (
-                    <Text>{i + 1}: {x}</Text>
+                    <Text key={i}>{i + 1}: {x}</Text>
                     )
-                })}
-                
-                <Text>{'\n'}</Text>
-                
-                <Text style={{fontWeight: "bold"}}> Tips: </Text>
-                <Text> {data.tips} </Text>
+                })}                
+                    <Text>{'\n'}</Text>
+                    
+                    <Text style={{fontWeight: "bold"}}> Tips: </Text>
+                    <Text> {data.tips} </Text>
 
-                <Text>{'\n'}</Text>
-                
-                <Text style={{fontWeight: "bold"}}> Prevalence: </Text>
-                <Text> {data.prevalence} </Text>
+                    <Text>{'\n'}</Text>
+                    
+                    <Text style={{fontWeight: "bold"}}> Prevalence: </Text>
+                    <Text> {data.prevalence} </Text>
 
-                <Text>{'\n'}</Text>
-                
-                <Text style={{fontWeight: "bold"}}> Nearest Doctor: </Text>
-                <Text> {data.doctor} </Text>
-                
-                </View>
+                    <Text>{'\n'}</Text>
+                    
+                    <Text style={{fontWeight: "bold"}}> Nearest Doctor: </Text>
+                    <Text> {data.doctor} </Text>        
             </ScrollView>
             }
-
-
-
         </React.Fragment>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        justifyContent: "center"
+        justifyContent: "center",
+        padding: 20, backgroundColor: "#fefefe",
     },
 })
 
