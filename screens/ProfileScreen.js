@@ -46,8 +46,11 @@ export default function ProfileScreen({ navigation, route }) {
             { isLoading && <Loading/>}
             { !isLoading && 
             <ScrollView style={{
-                flex: 1
-            }} contentContainerStyle={styles.container}>
+                    flex: 1
+                }} contentContainerStyle={{
+                    flex: 1,
+                }}
+            >
                 <View style={{
                     padding: 15, backgroundColor: "#fefefe",
                     elevation: 2,
@@ -131,29 +134,25 @@ export default function ProfileScreen({ navigation, route }) {
                         <Text style={{fontSize:15, color: "#5a5d81"}}>
                             My Diagnoses
                         </Text>
-                        <View style={{
-                            flex: 1,
-                            justifyContent: "center",
-                        }}>
-                            {!data.diagnoses &&
-                                <View style={{
-                                    alignItems: "center",
+                        {!data.diagnoses &&
+                            <View style={{
+                                flex: 1, justifyContent: "center",
+                                alignItems: "center",
+                            }}>
+                                <Text style={{
+                                    color: "#555",
+                                    fontSize: 18,
                                 }}>
-                                    <Text style={{
-                                        color: "#555",
-                                        fontSize: 18,
-                                    }}>
-                                        You have no Self-Diagnoses
-                                    </Text>
-                                    <Text style={{
-                                        color: "#999",
-                                        fontSize: 11,
-                                    }}>
-                                        Press on the Diagnosis tab to make one!
-                                    </Text>
-                                </View>
-                            }
-                        </View>
+                                    You have no Self-Diagnoses
+                                </Text>
+                                <Text style={{
+                                    color: "#999",
+                                    fontSize: 11,
+                                }}>
+                                    Press on the Diagnosis tab to make one!
+                                </Text>
+                            </View>
+                        }
                     </View>
                 </View>
 
@@ -181,9 +180,6 @@ function Loading() {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
     button: {
         backgroundColor: "#ddd",
         borderColor: "#aaa", borderWidth: 0.5, 
