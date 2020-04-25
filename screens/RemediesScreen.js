@@ -5,7 +5,13 @@ import ModalDropdown from 'react-native-modal-dropdown';
 
 export default function RemediesScreen({ navigation, route }) {
 
+    const initial = "acne";
+
+    const [con, setCon] = React.useState(initial);
+    
     const { isLoading, data } = useFirestoreDoc('conditions', "acne");
+
+    const [d, setD] = React.useState(data);
 
     const conditions = ["acne", "eczema", "light disease", "melanoma", "nail fungus",
                     "psoriasis", "scabies", "seborrheic keratoses", "ringworm", "warts"]
@@ -26,10 +32,12 @@ export default function RemediesScreen({ navigation, route }) {
                     'Nail Fungus', 'Psoriasis', 'Scabies', 'Keratoses', 'Ringworm', 'Warts']} 
                     onSelect={value => {
                         console.log(conditions[value])
-                        selectCondition(conditions[value])
+                        setCon(conditions[value])
                         }}
                 />
 
+                <Text>{'\n'}</Text>
+                <Text>Con: {con}</Text>
                 <Text>{'\n'}</Text>
 
                 <Text style={styles.sectionTitles}> Symptoms </Text>
@@ -88,7 +96,9 @@ const styles = StyleSheet.create({
 })
 
 function selectCondition(input) {
-    //const { isLoading, data } = useFirestoreDoc('conditions', input);
+    const { data } = useFirestoreDoc('conditions', input);
+    console.log("testing");
+    return data;
 }
 
 function Loading() {
