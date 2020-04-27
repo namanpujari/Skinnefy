@@ -57,35 +57,35 @@ export default class RemediesScreen extends React.Component {
                 <Text>{'\n'}</Text>
 
                 <Text style={styles.sectionTitles}> Symptoms </Text>
-                {this.state.data.symptoms.map((x, i) => {
+                {this.state.data.symptoms ? this.state.data.symptoms.map((x, i) => {
                     return (
                     <Text key={i}>{i + 1}: {x}</Text>
                     )
-                })}
+                }) : <Text style={styles.plainText}>No information was available.</Text>}
                 
                 <Text>{'\n'}</Text>
                 
                 <Text style={styles.sectionTitles}> Home Remedies </Text>
-                {this.state.data.Home_Remedies.map((x, i) => {
+                {this.state.data.Home_Remedies ? this.state.data.Home_Remedies.map((x, i) => {
                     return (
                     <Text key={i}>{i + 1}: {x}</Text>
                     )
-                })}    
+                }) : <Text style={styles.plainText}>No information was available.</Text>}    
                 
                 <Text>{'\n'}</Text>
                     
                 <Text style={styles.sectionTitles}> Tips </Text>
-                <Text>{this.state.data.tips}</Text>
+                <Text style={styles.plainText}>{this.state.data.tips ? this.state.data.tips : "No information was available."}</Text>
 
                 <Text>{'\n'}</Text>
                     
                 <Text style={styles.sectionTitles}> Prevalence </Text>
-                <Text>{this.state.data.prevalence}</Text>
+                <Text style={styles.plainText}>{this.state.data.prevalence ? this.state.data.prevalence : "No information was available."}</Text>
 
                 <Text>{'\n'}</Text>
                     
                 <Text style={styles.sectionTitles}> Nearest Doctor </Text>
-                <Text>{this.state.data.doctor}</Text>        
+                <Text style={styles.plainText}>{this.state.data.doctor ? this.state.data.doctor : "No information was available."}</Text>        
             
             </ScrollView>
             }
@@ -117,6 +117,9 @@ const styles = StyleSheet.create({
         textAlign: "center",
         fontWeight: "bold",
         textDecorationLine: "underline"
+    },
+    plainText: {
+        textAlign: "center"
     }
 })
 
