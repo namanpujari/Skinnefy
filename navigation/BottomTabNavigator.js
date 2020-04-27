@@ -4,9 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import DiagnosisStackNavigator from './DiagnosisStackNavigator';
 import ProfileStackNavigator from './ProfileStackNavigator';
-
-import RemediesScreen from '../screens/RemediesScreen';
-
+import RemediesStackNavigator from './RemediesStackNavigator';
 import TabBarIcon from '../components/TabBarIcon';
 
 const BottomTab = createBottomTabNavigator();
@@ -16,7 +14,7 @@ export default function BottomTabNavigator() {
         <BottomTab.Navigator>
             <BottomTab.Screen
                 name="Remedies"
-                component={RemediesScreen}
+                component={RemediesStackNavigator}
                 options={{
                     tabBarIcon: ({ focused }) => 
                         <TabBarIcon focused={focused} name="ios-search" />,
