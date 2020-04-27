@@ -12,7 +12,7 @@ export default class DetailsScreen extends React.Component {
         }
     }
     componentDidMount() {
-        db.collection('conditions').doc(this.props.route.params.query).onSnapshot(doc => {
+        db.collection('conditions').doc(this.props.route.params.query).get().then(doc => {
             this.setState({
                 isLoading: false, 
                 data: doc.data(),
