@@ -30,7 +30,9 @@ export default class RemediesScreen extends React.Component {
                                 <CardButton
                                     onPress={() => {this.props.navigation.navigate('Details', {
                                         query: condition.ref,
-                                        displayTop: condition.name
+                                        displayTop: condition.name,
+                                        description: condition.description,
+                                        image: condition.image,
                                     })}}
                                     title="Details"
                                     color="#FEB557"
