@@ -64,12 +64,6 @@ const prepared_conditions = [
         ref: "eczema",
     },
     { 
-        name: "Light Disease", 
-        image: "https://assets.nhs.uk/prod/images/C0166700.width-320.jpg",
-        description: "Light chain deposition disease (LCDD) is a rare blood cell disease which is characterized by deposition of fragments of infection-fighting immunoglobulins, called light chains (LCs), in the body.",
-        ref: "light disease",
-    },
-    { 
         name: "Melanoma", 
         image: "https://www.news-medical.net/image.axd?picture=2019%2F12%2F%40shutterstock_1391821073.jpg",
         description: "Melanoma is a serious form of skin cancer that begins in cells known as melanocytes.",

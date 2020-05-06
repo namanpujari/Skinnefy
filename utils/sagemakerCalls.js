@@ -5,8 +5,8 @@ var credentials = require("./awsConfig.json");
 var sagemakerruntime = new AWS.SageMakerRuntime({accessKeyId: credentials.accessKeyId, 
     secretAccessKey: credentials.secretAccessKey, region: "us-east-2",});
  
-const endpoint_name = "skinnefy-training-version2-endpoint"; 
-const conditions = ["Acne", "Eczema", "Light Disease", "Melanoma", "Nail Fungus",
+const endpoint_name = "endpoint-5-6-2020"; 
+const conditions = ["Acne", "Eczema", "Melanoma", "Nail Fungus",
                     "Psoriasis", "Scabies", "Seborrheic Keratoses", "Ringworm", "Warts"];
 
 FileReader.prototype.readAsArrayBuffer = function (blob) {
