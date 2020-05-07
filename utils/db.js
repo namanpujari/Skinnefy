@@ -17,3 +17,18 @@ export const useFirestoreDoc = (collectionName, docName) => {
     }, []);
     return docState;
 }
+
+export const useDiagnosisOnce = (postDocName) => {
+    const [docState, setDocState] = React.useState({ isLoading: true, data: null });
+    const compileData = async () => {
+        var diagnosisDoc = await db.collection("diagnoses").doc(postDocName).get();
+        setDocState({
+            isLoading: false,
+            data: diagnosisDoc.data(),
+        });
+    }
+    React.useEffect(() => {
+        compileData();
+    }, []);
+    return docState;
+}
